@@ -1,8 +1,20 @@
+/**
+ * Linked list library
+ * @file linked_list.c
+ * @author Eben
+ * @date Thursday, 2024
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include "linked_list.h"
 
+/**
+ * @param node -> node in linked list
+ * @param int -> value to replace the current val with
+ * @return nothing, creates side effects
+*/
 void replace_matches(Node* node, int find_value, int replace_value) {
     if (node != NULL) {
         if (node->value == find_value)  {
