@@ -14,6 +14,7 @@ Node *delete_at_tail(Node *head);
 int length(Node *head);
 int recursive_length(Node *node);
 bool is_member(Node *node, int find_value);
+void replace_matches(Node* node, int find_value, int replace_value);
 
 int main()
 {
@@ -27,6 +28,15 @@ int main()
     printf("%d\n", is_member(list1_head, 7));
 
     printf("Linked list length: %d\n", length(list1_head));
+}
+
+void replace_matches(Node* node, int find_value, int replace_value) {
+    if (node != NULL) {
+        if (node->value == find_value)  {
+            node->value = replace_value;
+        }
+        replace_matches(node->next, find_value, replace_value);
+    }
 }
 
 int count_matches(Node *node, int find_value)
