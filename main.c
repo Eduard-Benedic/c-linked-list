@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 typedef struct node {
     int value;
     struct node *next;
@@ -11,6 +12,8 @@ Node *insert_at_tail(Node *head, int new_value);
 Node *delete_at_head(Node *head);
 Node *delete_at_tail(Node *head);
 int length(Node *head);
+int recursive_length(Node *node);
+bool is_member(Node *node, int find_value);
 
 int main()
 {
@@ -20,9 +23,30 @@ int main()
     list1_head = insert_at_head(list1_head, 3);
     list1_head = insert_at_tail(list1_head, 100);
     list1_head = insert_at_head(list1_head, 323);
-    print_list(list1_head);
+    
+    printf("%d\n", is_member(list1_head, 7));
 
     printf("Linked list length: %d\n", length(list1_head));
+}
+
+int count_matches(Node *node, int find_value)
+{
+    if (node == NULL) return 0;
+    else if(node->value == find_value)
+        return 1 + count_matches(node->next, find_value);
+    else return count_matches(node->next, find_value);
+}
+
+int recursive_length(Node *node) {
+    if (node == NULL) return 0;
+    else return 1 + recursive_length(node->next);
+}
+
+bool is_member(Node *node, int find_value)
+{
+    if (node == NULL) return false;
+    else if (node->value == find_value) return true;
+    else return is_member(node->next, find_value);
 }
 
 int length(Node *head) {
